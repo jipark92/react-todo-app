@@ -1,3 +1,3 @@
 React version of To-Do App!
 
-DEMO: https://github.com/norfkorean/react-todo-app
+DEMO: https://react-tasks-project.netlify.app/

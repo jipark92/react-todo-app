@@ -71,3 +71,7 @@
 h1{
   text-align: center;
 }
+
+input{
+  border: none;
+}
