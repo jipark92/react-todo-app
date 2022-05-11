@@ -2,26 +2,24 @@ import {Form, Button} from 'react-bootstrap'
 import {useState} from 'react'
 
 export default function ToDo() {
-    //bootstrap
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    //storage
+
     const [inputValue, setInputValue] = useState("")
     const [errorText, setErrorText] = useState("")
     const [successColor, setSuccessColor] = useState("")
+    const [editStatus, setEditStatus] = useState(true)
     
-
     const [tasks, setTasks] = useState([{
-        name: "Go to the bank"
+        name: "Go to the bank",
+        edit: true
     },
     {
-        name: "Walk my dog"
+        name: "Walk my dog",
+        edit: true
     },
     {
-        name: "Eat dinner with friend"
-    }
-])
+        name: "Eat dinner with friend",
+        edit: true
+    }])
 
     const randomRainbow = () => {
         let letters = "0123456789ABCDEF";
@@ -68,17 +66,31 @@ export default function ToDo() {
         setTasks(filteredTasks)
     }
 
+    const handleEdit = (e) =>{
+        console.log('edit clicked')
+        setTasks(prevTasks=> prevTasks.map((tasks,i)=>{
+            if(parseInt(e.target.id)===i){
+                return [...tasks, {
+                    name: "blah",
+                    edit: false
+                }]
+            }
+        }))
+
+    }
+
     const showTasks = tasks.map((task,i)=>{
         return(
             <div className='tasks' key={i} style={{backgroundColor:`${randomRainbow()}`}}>
-                <div className='task-list'>
-                    <p className='text-light h5'>#{i}. {task.name}</p>
+                <div className={editStatus?"task-list":"task-list-edit"}>
+                    <h2>#{i}</h2>
+                    <input type ="text" value={task.name} className={editStatus?"task-list":"task-list-edit"}/>
                 </div>
                 
                 <div className='btn-container'>
-                    <Button variant="success">EDIT</Button>
+                    <Button variant="success" onClick={handleEdit} id={i}>EDIT TITLE</Button>
                     {/* <Button variant="primary">TODO</Button> */}
-                    <Button variant="danger" onClick={handleDelete} id={i} >DELETE</Button>
+                    <Button variant="danger" onClick={handleDelete} id={i}>DELETE TASK</Button>
                 </div>
             </div>
         )
