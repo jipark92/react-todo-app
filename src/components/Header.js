@@ -1,9 +1,8 @@
-import { Nav, Container, Navbar, NavDropdown } from 'react-bootstrap';
-import {Link} from 'react-router-dom'
+import { Nav, Container, Navbar} from 'react-bootstrap';
 
 export default function Header() {
     return (
-        <>
+        <div className='header-container'>
             <Navbar bg="dark" variant="dark">
                 <Container>
                     <Navbar.Brand href="#home">React-ToDo App</Navbar.Brand>
@@ -11,6 +10,6 @@ export default function Header() {
                     </Nav>
                 </Container>
             </Navbar>
-        </>
+        </div>
     )
 }
