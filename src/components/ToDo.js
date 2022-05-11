@@ -1,17 +1,20 @@
 import {Form, Button} from 'react-bootstrap'
-import {useState,useEffect} from 'react'
+import {useState} from 'react'
 
 export default function ToDo() {
 
     const [inputValue, setInputValue] = useState()
 
     const [tasks, setTasks] = useState([{
-        name: "example 1"
-    }])
-
-    useEffect(()=>{
-        
-    })
+        name: "Go to the bank"
+    },
+    {
+        name: "Walk my dog"
+    },
+    {
+        name: "Eat dinner with friend"
+    }
+])
 
     const randomRainbow = () => {
         let letters = "0123456789ABCDEF";
@@ -27,10 +30,12 @@ export default function ToDo() {
     }
 
     const submitValue = () => {
-        tasks.push({name: inputValue})
-        // setTasks(tasks=> tasks.push({name: inputValue}))
-        
-        console.log(tasks)
+        // tasks.push({name: inputValue})
+        setTasks(prevTasks =>  {
+            return [...prevTasks, {
+                name: inputValue
+            }]
+        })
     }
 
     const showTasks = tasks.map((task,i)=>{
@@ -56,10 +61,10 @@ export default function ToDo() {
                 <div className="input-container">
                     <Form.Control size="lg" type="text" placeholder="Go to the bank" onChange={changeInputValue}/>
                     <div className="d-grid gap-2">
-                        <Button variant="warning" size="lg" onClick={submitValue}>Submit</Button>
+                        <Button variant="warning" size="lg" onClick={submitValue}>SUBMIT</Button>
                     </div>
                 </div>
-                <h2 className='text-light'>TO DO LIST</h2>
+                <h3 className='text-light'>TO DO LIST</h3>
                 <div className="tasks-container">
                     {showTasks}
                 </div>
